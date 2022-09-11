@@ -3,6 +3,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:9000",
+    // baseUrl: "https://pacific-mountain-56378.herokuapp.com/",
   }),
   tagTypes: ["todos"],
   endpoints: (builder) => ({
