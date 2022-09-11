@@ -6,6 +6,7 @@ import { useAddTodoMutation } from "../features/api/apiSlice";
 
 const Header = () => {
   const [addTodo] = useAddTodoMutation();
+
   const [inputValue, setInputValue] = useState("");
 
   const handleAddTodo = (e) => {

@@ -7,7 +7,7 @@ export const apiSlice = createApi({
   tagTypes: ["todos"],
   endpoints: (builder) => ({
     getTodos: builder.query({
-      query: () => "/todos",
+      query: () => `/todos`,
       providesTags: ["todos"],
     }),
     addTodo: builder.mutation({
@@ -22,10 +22,19 @@ export const apiSlice = createApi({
       query: ({ id, color }) => ({
         url: `/todos/${id}`,
         method: "PATCH",
-        body: { color: color },
+        body: { color },
       }),
       invalidatesTags: ["todos"],
     }),
+    EditInput: builder.mutation({
+      query: ({ id, text }) => ({
+        url: `/todos/${id}`,
+        method: "PATCH",
+        body: { text },
+      }),
+      invalidatesTags: ["todos"],
+    }),
+
     completedTask: builder.mutation({
       query: ({ id, completed }) => ({
         url: `/todos/${id}`,
@@ -50,4 +59,5 @@ export const {
   useEditColorMutation,
   useDeleteTodoMutation,
   useCompletedTaskMutation,
+  useEditInputMutation,
 } = apiSlice;

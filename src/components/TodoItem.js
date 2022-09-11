@@ -1,23 +1,34 @@
 import React from "react";
+import { useState } from "react";
 import { GrFormEdit } from "react-icons/gr";
 import cancel from "../assets/images/cancel.png";
 import {
   useCompletedTaskMutation,
   useDeleteTodoMutation,
   useEditColorMutation,
+  useEditInputMutation,
 } from "../features/api/apiSlice";
 
 const TodoItem = ({ todo }) => {
   const [EditColor] = useEditColorMutation();
   const [deleteTodo] = useDeleteTodoMutation();
   const [completedTask] = useCompletedTaskMutation();
+  const [EditInput] = useEditInputMutation();
+  const [show, setShow] = useState(false);
   const { id, text, completed, color } = todo;
+  const [inputValue, setInputValue] = useState(text);
 
   const handleDelete = () => {
     const confirmation = window.confirm("are you sure ?");
     if (confirmation) {
       deleteTodo(id);
     }
+  };
+
+  const handleEditInput = async (e) => {
+    e.preventDefault();
+    await EditInput({ id: id, text: inputValue });
+    setShow(false);
   };
 
   return (
@@ -39,8 +50,25 @@ const TodoItem = ({ todo }) => {
         )}
       </div>
 
-      <div className={`select-none flex-1 ${completed && "line-through"}`}>
-        {text}
+      <div
+        className={`select-none flex-1 ${completed && "line-through"}`}
+        onDoubleClick={() => setShow(true)}
+        title="DoubleClick to Edit"
+      >
+        {show ? (
+          <form onSubmit={handleEditInput}>
+            <input
+              type="text"
+              value={inputValue}
+              autoFocus
+              className="px-4 py-2 border-2 rounded"
+              onChange={(e) => setInputValue(e.target.value)}
+              onBlur={handleEditInput}
+            />
+          </form>
+        ) : (
+          text
+        )}
       </div>
 
       <div
@@ -64,7 +92,7 @@ const TodoItem = ({ todo }) => {
         }`}
       ></div>
 
-      <div className="text-2xl cursor-pointer">
+      <div className="text-2xl cursor-pointer" onClick={() => setShow(true)}>
         <GrFormEdit />
       </div>
 
