@@ -3,20 +3,22 @@ import plus from "../assets/images/plus.png";
 import notes from "../assets/images/notes.png";
 import doubleTick from "../assets/images/double-tick.png";
 import { useAddTodoMutation } from "../features/api/apiSlice";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const [addTodo] = useAddTodoMutation();
 
   const [inputValue, setInputValue] = useState("");
 
-  const handleAddTodo = (e) => {
+  const handleAddTodo = async (e) => {
     e.preventDefault();
-    addTodo({
+    await addTodo({
       text: inputValue,
       completed: false,
       color: "",
     });
     setInputValue("");
+    toast.success("Successfully Added!");
   };
 
   return (

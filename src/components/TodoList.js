@@ -7,11 +7,13 @@ import TodoItem from "./TodoItem";
 
 const TodoList = () => {
   const dispatch = useDispatch();
-  const { data, isError, isLoading } = useGetTodosQuery();
+  const { data, isError, isLoading, isSuccess } = useGetTodosQuery();
 
   useEffect(() => {
-    dispatch(uiLoaded(data));
-  }, [data, dispatch]);
+    if (isSuccess) {
+      dispatch(uiLoaded(data));
+    }
+  }, [data, dispatch, isSuccess]);
   const { todos } = useSelector((state) => state.filter);
 
   // what to do render

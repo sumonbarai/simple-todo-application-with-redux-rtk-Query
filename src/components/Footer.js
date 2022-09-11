@@ -12,6 +12,7 @@ const Footer = () => {
   const { todos } = useSelector((state) => state.filter);
 
   const remainingUncompletedTask = todos.filter((todo) => !todo.completed);
+
   const [selectedColor, setSelectedColor] = useState("");
   const [bold, setBold] = useState("all");
   const dispatch = useDispatch();

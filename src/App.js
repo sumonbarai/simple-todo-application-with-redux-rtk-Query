@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Toaster } from "react-hot-toast";
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -17,6 +17,7 @@ function App() {
         <hr className="mt-4" />
         <Footer />
       </div>
+      <Toaster />
     </div>
   );
 }
