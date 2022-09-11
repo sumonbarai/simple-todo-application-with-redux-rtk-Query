@@ -28,9 +28,30 @@ const filterSlice = createSlice({
       const filter = state.all.filter((todo) => todo.color === action.payload);
       state.todos = filter;
     },
+    completedAllTask: (state, action) => {
+      const filter = state.todos.map((todo) => {
+        todo.completed = true;
+        return todo;
+      });
+      state.todos = filter;
+    },
+    clearCompleted: (state, action) => {
+      const filter = state.todos.map((todo) => {
+        todo.completed = false;
+        return todo;
+      });
+      state.todos = filter;
+    },
   },
 });
 
 export default filterSlice.reducer;
-export const { uiLoaded, completed, inCompleted, all, color } =
-  filterSlice.actions;
+export const {
+  uiLoaded,
+  completed,
+  inCompleted,
+  all,
+  color,
+  completedAllTask,
+  clearCompleted,
+} = filterSlice.actions;

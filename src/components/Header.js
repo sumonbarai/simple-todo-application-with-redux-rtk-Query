@@ -4,10 +4,15 @@ import notes from "../assets/images/notes.png";
 import doubleTick from "../assets/images/double-tick.png";
 import { useAddTodoMutation } from "../features/api/apiSlice";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import {
+  clearCompleted,
+  completedAllTask,
+} from "../features/filter/filterSlice";
 
 const Header = () => {
   const [addTodo] = useAddTodoMutation();
-
+  const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
 
   const handleAddTodo = async (e) => {
@@ -19,6 +24,13 @@ const Header = () => {
     });
     setInputValue("");
     toast.success("Successfully Added!");
+  };
+
+  const handleCompletedAll = () => {
+    dispatch(completedAllTask());
+  };
+  const handleClearCompleted = () => {
+    dispatch(clearCompleted());
   };
 
   return (
@@ -45,9 +57,11 @@ const Header = () => {
       <ul className="flex justify-between my-4 text-xs text-gray-500">
         <li className="flex space-x-1 cursor-pointer">
           <img className="w-4 h-4" src={doubleTick} alt="Complete" />
-          <span>Complete All Tasks</span>
+          <span onClick={handleCompletedAll}>Complete All Tasks</span>
         </li>
-        <li className="cursor-pointer">Clear completed</li>
+        <li className="cursor-pointer" onClick={handleClearCompleted}>
+          Clear completed
+        </li>
       </ul>
     </div>
   );
