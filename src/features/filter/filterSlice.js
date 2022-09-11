@@ -25,9 +25,7 @@ const filterSlice = createSlice({
       state.todos = filter;
     },
     color: (state, action) => {
-      const filter = state.todos.filter(
-        (todo) => todo.color === action.payload
-      );
+      const filter = state.all.filter((todo) => todo.color === action.payload);
       state.todos = filter;
     },
   },
