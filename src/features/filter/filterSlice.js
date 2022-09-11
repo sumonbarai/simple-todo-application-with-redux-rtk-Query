@@ -29,14 +29,14 @@ const filterSlice = createSlice({
       state.todos = filter;
     },
     completedAllTask: (state, action) => {
-      const filter = state.todos.map((todo) => {
+      const filter = state.all.map((todo) => {
         todo.completed = true;
         return todo;
       });
       state.todos = filter;
     },
     clearCompleted: (state, action) => {
-      const filter = state.todos.map((todo) => {
+      const filter = state.all.map((todo) => {
         todo.completed = false;
         return todo;
       });
